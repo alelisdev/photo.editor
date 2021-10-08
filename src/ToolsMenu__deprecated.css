@@ -1,0 +1,61 @@
+
+.toolsMenuContainer {
+  background-color: white;
+  width: 25%;
+  height: 100%;
+  padding-left: 10px;
+  position: relative;
+}
+
+.toolIconContainer {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolIcons {
+  width: 86px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolIcon {
+
+}
+
+.toolIconContainer:hover, .toolIconContainerSelected {
+  background-color: lightgrey;
+  filter: invert();
+  border-radius: 2px;
+}
+
+.cropAccept, .cropCancel {
+  position: absolute;
+  bottom: 3px;
+  left: -35px;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.cropAccept:hover {
+  color: white;
+}
+
+.cropCancel {
+  left: -85px;
+  color: #111;
+}
+
+.whiteCheckmark {
+  filter: invert();
+}

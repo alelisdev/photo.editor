@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="photo-editor-root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+<!-- ↓↓ Custom save button and modal to save image from the photo editor ↓↓ -->
+
+<div id="photo-editor-save-image-popup-mask">
+</div>
+<div id="photo-editor-save-image-popup">
+    <div id="photo-editor-save-image-popup-title">
+      Save as
+    </div>
+    <img src="images/close-outline.svg" id="photo-editor-save-image-popup-close-button">
+
+    </img>
+    <div id="photo-editor-save-image-options">
+      <div id="photo-editor-save-button-profile-image" class="photo-editor-save-image-option">
+        <img src="images/person-circle-outline.svg" class="photo-editor-save-image-option-logo photo-editor-save-image-option-inverted">
+        </img>
+        <p class="photo-editor-save-image-option-name">
+          Profile Image
+        </p>
+      </div>
+      <div id="photo-editor-save-button-profile-banner" class="photo-editor-save-image-option">
+        <img src="images/tablet-landscape-outline.svg" class="photo-editor-save-image-option-logo photo-editor-save-image-option-inverted">
+        </img>
+        <p class="photo-editor-save-image-option-name">
+          Profile Banner
+        </p>
+      </div>
+      <div id="photo-editor-save-button-download" class="photo-editor-save-image-option">
+        <img src="images/download-outline.svg" class="photo-editor-save-image-option-logo photo-editor-save-image-option-inverted">
+        </img>
+        <p class="photo-editor-save-image-option-name">
+          PNG Download
+        </p>
+      </div>
+      <div id="photo-editor-save-button-meme-post" class="photo-editor-save-image-option">
+        <img src="images/cloud-upload-outline.svg" class="photo-editor-save-image-option-logo photo-editor-save-image-option-inverted">
+        </img>
+        <p class="photo-editor-save-image-option-name">
+          Meme Post
+        </p>
+      </div>
+    </div>
+</div>
+<script>
+
+
+</script>
+<script>
+
+  (function() {
+
+    /* Popup functions */
+
+    function showPopup() {
+      document.getElementById("photo-editor-save-image-popup").style.display = "flex";
+      document.getElementById("photo-editor-save-image-popup-mask").style.display = "flex";
+    }
+
+    function hidePopup() {
+        document.getElementById("photo-editor-save-image-popup").style.display = "none";
+        document.getElementById("photo-editor-save-image-popup-mask").style.display = "none";
+    }
+    
+    function readURL(file, callback) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            callback(e.target.result);
+        }
+
+        reader.readAsDataURL(file); // convert to base64 string
+    }
+    
+    var savedFile;
+
+    document.getElementById("photo-editor-save-image-popup-close-button").addEventListener("click", () => {
+        hidePopup();
+    });
+    
+    document.getElementById("photo-editor-save-button-profile-image").addEventListener("click", () => {
+        if (!savedFile) return;
+        readURL(savedFile, function(dataURL) {
+            window.localStorage.setItem("tempSavedProfileImage", dataURL);
+            window.location.href = "{{ url('/me') }}";
+        });
+    });
+
+    document.getElementById("photo-editor-save-button-profile-banner").addEventListener("click", () => {
+        if (!savedFile) return;
+        readURL(savedFile, function(dataURL) {
+            window.localStorage.setItem("tempSavedProfileBanner", dataURL);
+            window.location.href = "{{ url('/me') }}";
+        });
+    });
+
+    document.getElementById("photo-editor-save-button-download").addEventListener("click", () => {
+        window.photoEditorLib.exportImage();
+    });
+
+    document.getElementById("photo-editor-save-button-meme-post").addEventListener("click", () => {
+      if (!savedFile) return;
+      readURL(savedFile, function(dataURL) {
+        window.localStorage.setItem("tempSavedMemePost", dataURL);
+        window.location.href = "{{ url('/meme') }}";
+      });
+    });
+
+    /* photoEditorLib event listeners */
+
+    // When photoEditorLib loads (photoEditorLib is the core part of the photo editor React app),
+    // it by default looks if it has been left any event listeners beforehand.
+    // This way we can add event listeners for the photo editor in other parts of the web page
+    // without having to worry about loading order.
+    // Here we are adding event listeners to implement different image saving options
+    // that are specific to the website.
+    // In case photoEditorLib hasn't been loaded and added to the window object yet, we
+    // make a spoof version of it. When photoEditorLib loads it checks if there exists a spoof
+    // version of it on the window object and if there is it transfers all the event listeners from it to itself.
+    // It then overrides the window.photoEditorLib spoof object with itself.
+
+    if (!window.photoEditorLib) {
+        window.photoEditorLib = {};
+    }
+
+    if (!window.photoEditorLib.eventListeners) {
+      window.photoEditorLib.eventListeners = [];
+    }
+
+    if (!window.photoEditorLib.on) {
+      window.photoEditorLib.on = (evtString, evtHandler) => {
+        window.photoEditorLib.eventListeners.unshift({
+            type: evtString,
+            handler: evtHandler
+        });
+      }
+    }
+
+    // Enabling manual save mode on the photo editor makes it so that when an image is saved from the photo editor
+    // by the user or otherwise, instead of the file being downloaded to the local computer, it is dispatched to all
+    // event listeners listening to the event "imageSave".
+    var enableManualSaveMode = () => {
+        window.photoEditorLib.enableManualSaveMode({
+            manualSaveType: "file"
+        });
+    }
+    
+    // Show popup of different save options to the user
+    var onImageSave = (file) => {
+      savedFile = file;
+      showPopup();
+    }
+    // On the actual "on" method of photoEditorLib, the third argument signifies immediate dispatching of the event.
+    // We supply this argument in case we are calling the real method instead of a spoof.
+    // On the spoof this argument doesn't matter because photoEditorLib will be able to dispatch its load event
+    // once it has loaded. If it has already loaded, we use immediate dispatching of the event.
+    window.photoEditorLib.on("load", enableManualSaveMode, true);
+    window.photoEditorLib.on("imageSave", onImageSave);
+
+  })();
+
+</script>
+<style>
+
+  #photo-editor-save-image-popup {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 600px;
+    height: 400px;
+    background-color: #031625e6;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -200px;
+    background-clip: padding-box;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px rgb(0 0 0 / 48%), 0 6px 16px 0 rgb(0 0 0 / 32%), 0 9px 28px 8px rgb(0 0 0 / 20%);
+    pointer-events: auto;
+    z-index: 1000;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  #photo-editor-save-image-popup-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100%;
+    background-color: rgba(0,0,0,.45);
+    display: none;
+  }
+
+  #photo-editor-save-image-popup-title {
+    position: absolute;
+    top: 50px;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  #photo-editor-save-image-popup-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    cursor: pointer;
+    filter: invert(1) brightness(0.5);
+  }
+
+  #photo-editor-save-image-popup-close-button:hover {
+    filter: invert(1) brightness(0.8);
+  }
+
+  #photo-editor-save-image-options {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .photo-editor-save-image-option {
+    width: 100px;
+    height: 120px;
+    border: 1px solid rgb(71, 71, 71);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: column nowrap;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .photo-editor-save-image-option:hover {
+    background-color: #020e17a1;
+  }
+
+  .photo-editor-save-image-option-logo {
+    width: 60px;
+  }
+
+  .photo-editor-save-image-option-inverted {
+    filter: invert(1);
+  }
+
+  .photo-editor-save-image-option-name {
+    font-size: 11px;
+    text-align: center;
+  }
+
+</style>
+
+<!-- ↑↑ Custom save button and modal to save image from the photo editor ↑↑ -->
+            
+  </body>
+</html>

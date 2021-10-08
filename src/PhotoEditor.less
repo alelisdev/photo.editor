@@ -1,0 +1,612 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+#photo-editor-root {
+
+    
+  canvas {
+    image-rendering: pixelated;
+  }
+
+  #mainContainer {
+    width: 100%;
+    padding-top: 10px;
+    height: 810px;
+  }
+
+  #toolOptionsMenu {
+    height: 24px;
+    width: 98%;
+    margin-left: 1%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .colorPickerContainer {
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+
+  .colorPickerButtonContainer {
+    position: relative;
+    height: 24px;
+    width: 24px;
+  }
+
+  .addTextEmojiButton {
+    border: 1px solid rgb(67, 67, 67);
+    margin-left: 10px;
+    display: inline-block;
+    background-color: transparent;
+    border-radius: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+  }
+
+  .addTextEmojiButton:focus {
+    border-color: #0e71b8;
+  }
+
+  .drawingCanvasCursor {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: 1px solid #111;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  #upperRow {
+    width: 99%;
+    height: 34px;
+    margin-left: 1%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .clearCanvasButton {
+    position: absolute;
+    right: 35%;
+    bottom: 10px;
+    margin-right: 110px;
+  }
+
+  .clearCanvasButton > div > img {
+    margin-right: 0px;
+    filter: brightness(1);
+  }
+
+  .undoRedoButton {
+    -webkit-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    cursor: pointer;
+    right: 35%;
+    margin-right: 34px;
+    -webkit-filter: invert(1) brightness(0.85);
+            filter: invert(1) brightness(0.85);
+  }
+
+  .undoButton {
+    position: absolute;
+    bottom: 10px;
+    margin-right: 58px;
+    -webkit-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+            transform: scaleX(-1);
+  }
+
+  .redoButton {
+    right: 35%;
+    position: absolute;
+    bottom: 10px;
+    margin-right: 29px;
+  }
+
+  .undoRedoButton:hover {
+    opacity: 0.7
+  }
+
+  .undoRedoButtonDisabled {
+    -webkit-filter: invert(1) brightness(0.3);
+            filter: invert(1) brightness(0.3);
+  }
+
+  .canvasTools {
+    width: 98%;
+    height: 700px;
+    margin-left: 1%;
+    margin-right: 1%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    position: relative;
+  }
+
+
+  .canvasesContainer {
+    width: 65%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #212121;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+
+  #canvasesZoomContainer {
+    transition: all 0.1s;
+  }
+
+  .emptyCanvasImage {
+    position: absolute;
+    top: 263px;
+    width: 100%;
+  }
+
+  #robotImage {
+    font-size: 80px;
+  }
+
+  .emptyText {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .toolsMenuContainer {
+    width: 35%;
+    height: 100%;
+    padding-left: 10px;
+    position: relative;
+  }
+
+  .filtersTabContainer {
+    width: 96%;
+    margin: auto;
+    height: 649px;
+    overflow-y: auto;
+  }
+
+  .filtersRefreshButton {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 18px;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+            transform: scaleX(-1);
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+
+  .filtersRefreshButton:hover {
+    -webkit-filter: brightness(0.5);
+            filter: brightness(0.5);
+  }
+
+  .toolIconContainer {
+    width: 34px;
+    height: 34px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .toolIcons {
+    width: 34px;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    background-color: darkgrey;
+    -webkit-filter: invert(1) brightness(0.85);
+            filter: invert(1) brightness(0.85);
+  }
+
+  .toolIcon {
+    height: 24px;
+  }
+
+  .addTextToolIcon, .cropToolIcon {
+    height: 32px;
+    width: 32px;
+  }
+
+  .toolIconContainer:hover, .toolIconContainerSelected {
+    background-color: lightgrey;
+    -webkit-filter: invert(1);
+            filter: invert(1);
+    border-radius: 2px;
+  }
+
+  .colorPickerButtonTilePattern {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-transition: opacity 0.3s, -webkit-filter 0.3s;
+    transition: opacity 0.3s, -webkit-filter 0.3s;
+    -o-transition: opacity 0.3s, filter 0.3s;
+    transition: opacity 0.3s, filter 0.3s;
+    transition: opacity 0.3s, filter 0.3s, -webkit-filter 0.3s;
+    border: 0px solid #f5f5f5;
+    pointer-events: none;
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-size: cover;
+  }
+
+  .colorPickerButton {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-transition: opacity 0.3s, -webkit-filter 0.3s;
+    transition: opacity 0.3s, -webkit-filter 0.3s;
+    -o-transition: opacity 0.3s, filter 0.3s;
+    transition: opacity 0.3s, filter 0.3s;
+    transition: opacity 0.3s, filter 0.3s, -webkit-filter 0.3s;
+    border: 0px solid #f5f5f5;
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  .colorPickerButton:hover {
+    -webkit-filter: brightness(1.3);
+            filter: brightness(1.3);
+  }
+
+  .colorPickerButton:active {
+    -webkit-filter: brightness(0.8);
+            filter: brightness(0.8);
+  }
+
+  .colorPicker {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100px;
+    margin-top: 14px;
+    background-color: rgb(40, 40, 40);
+    position: absolute;
+    top: 28px;
+    z-index: 10;
+    padding: 10px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 10px #181818;
+            box-shadow: 0 0 10px #181818;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease 0s;
+  }
+
+  #eraseAllDrawingButton {
+    font-size: 1em;
+  }
+
+  #fontMenuContainer {
+    margin-left: 10px;
+    font-size: 1em;
+  }
+
+  .fontMenu {
+    width: 140px;
+  }
+
+  .optionsTabTitle {
+    width: 110px;
+  }
+
+  .optionsTabValue {
+    display: flex;
+    justify-content: flex-end;
+    width: 100px;
+  }
+
+  .resolutionTag {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    padding: 5px;
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: 2px;
+    background-color: rgb(31, 31, 31);
+  }
+
+  .cropAccept, .cropCancel {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    font-size: 12px;
+    color: white;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 40px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .cropAccept:hover {
+    color: white;
+  }
+
+  .cropCancel {
+    right: 59px;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid transparent;
+    background-color: rgb(31, 31, 31);
+  }
+
+  .cropCancel:hover {
+    border: 1px solid #0e71b8;
+    color: 1px solid #0e71b8;
+    background-color: rgb(31, 31, 31);
+  }
+
+  .whiteCheckmark {
+    -webkit-filter: invert(1);
+            filter: invert(1);
+  }
+
+  .toolOptionsSlider {
+    width: 110px;
+    height: 100%;
+    margin-left: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .toolOptionsSlider:first-child {
+    margin-left: 0px;
+  }
+
+  .fileOptionsMenu {
+    position: absolute;
+    bottom: -45px;
+    left: 0%;
+    margin-left: -203.74px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  [data-theme='compact'] .site-collapse-custom-collapse .site-collapse-custom-panel,
+  .site-collapse-custom-collapse .site-collapse-custom-panel {
+    margin-left: -10px;
+    border: 0px;
+    overflow: hidden;
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+  #photo-editor-root {
+
+    .undoRedoButton {
+      right: 5%;
+    }
+  
+    .clearCanvasButton {
+      right: 5%;
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+
+  #photo-editor-root {
+
+    #mainContainer {
+      height: auto;
+    }
+  
+    .clearCanvasButton {
+      position: absolute;
+      left: 50%;
+      margin-left: -16px;
+      bottom: 56px;
+      margin-right: 69px;
+    }
+  
+    .undoButton {
+      position: absolute;
+      right: 0%;
+      margin-right: 60px;
+      bottom: 56px;
+      -webkit-transform: scaleX(-1);
+          -ms-transform: scaleX(-1);
+              transform: scaleX(-1);
+    }
+  
+    .redoButton {
+      right: 0%;
+      position: absolute;
+      bottom: 56px;
+      margin-right: 21px;
+    }
+  
+    #upperRow {
+      width: 99%;
+      height: 43px;
+      margin-left: 1%;
+      margin-bottom: 20px;
+    }
+  
+    #toolOptionsMenu {
+      height: 24px;
+      width: 98%;
+      margin-left: 1%;
+      margin-top: 32px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+    }
+  
+    .canvasTools {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-flow: column nowrap;
+              flex-flow: column nowrap;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      height: auto;
+    }
+  
+    .canvasesContainer {
+      width: 100%;
+      height: 500px;
+    }
+  
+    .emptyCanvasImage {
+      top: 163px;
+    }
+  
+    .toolsMenuContainer {
+      width: 100%;
+      height: 600px;
+      margin-top: 80px;
+    }
+  
+    .filtersTabContainer {
+      width: 96%;
+      margin: auto;
+      height: 500px;
+      overflow-y: auto;
+    }
+  
+    .toolIcons {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-flow: row nowrap;
+              flex-flow: row nowrap;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      height: 48px;
+      width: 100%;
+    }
+  
+    .toolIconContainer {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 0px;
+    }
+  
+    .toolIcon {
+      width: 26px;
+      height: 26px;
+    }
+  
+    .cropToolIcon {
+      width: 38px;
+      height: 38px;
+    }
+  
+    .addTextToolIcon {
+      width: 38px;
+      height: 38px;
+    }
+  
+    .fileOptionsMenu {
+      bottom: auto;
+      top: -65px;
+      justify-content: space-around;
+      width: 98%;
+      height: 50px;
+      position: absolute;
+      bottom: 0px;
+      width: 70%;
+      margin-left: 15%;
+      align-items: center;
+    }
+
+  }
+
+}
