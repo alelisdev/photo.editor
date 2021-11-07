@@ -8,13 +8,10 @@ import PhotoEditor from "./PhotoEditor.js";
 import 'cropperjs/dist/cropper.css';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
   }
-
   render() {
-
     /*
     var testImages = [
       {
@@ -48,7 +45,6 @@ class App extends React.Component {
         url: 'white-background.png',
       }
     ]; **/
-
     return (
       <div className="photoEditorOuterWrapper">
         {
@@ -98,7 +94,6 @@ class App extends React.Component {
 
     );
   }
-
 }
 
 export default App;
